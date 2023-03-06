@@ -13,3 +13,8 @@ This documentation is a recap of the activities done and concepts learnt during 
 - Installed AWS CLI
 - Created a Billing Alarm
 - Created a Budget
+
+# Creating a User
+To create a User I followed the following steps as outlined in [this](https://www.iguazio.com/docs/latest-release/cluster-mgmt/deployment/cloud/aws/howto/iam-user-create/) tutorial.
+## Step 1 Log in to AWS
+Log in to the AWS console and search IAM service
