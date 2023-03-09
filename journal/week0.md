@@ -24,3 +24,41 @@ To create a User I followed the following steps as outlined in [this](https://ww
 - Save the User's credentials (**Access key ID** and **Secret Access Key**)
 
 # Install AWS CLI
+- To install AWS CLI, you first launch the GitPod environment
+- Then set AWS CLI to use partial autoprompt mode to make it easier to debug CLI commands
+- Installation commands used are also found [here](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+
+Update the .gitpod.yml to include the following task.
+```
+tasks:
+  - name: aws-cli
+    env:
+      AWS_CLI_AUTO_PROMPT: on-partial
+    init: |
+      cd /workspace
+      curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+      unzip awscliv2.zip
+      sudo ./aws/install
+      cd $THEIA_WORKSPACE_ROOT
+      
+```
+The commands are run individually while performing  a manual installation
+## Set Env Vars
+To configure user credential on the bash terminal, you use the following commands
+```
+export AWS_ACCESS_KEY_ID=""
+export AWS_SECRET_ACCESS_KEY=""
+export AWS_DEFAULT_REGION=us-east-1
+```
+For Gitpod to remember the credentials when the workspaces are launched, you run the following commands:
+```
+gp env AWS_ACCESS_KEY_ID=""
+gp env AWS_SECRET_ACCESS_KEY=""
+gp env AWS_DEFAULT_REGION=us-east-1
+
+```
+To check that the AWS CLI is working and the expected user is correct, I ran the command
+```
+aws sts get-caller-identity
+```
+![getcalleridentity](image)
