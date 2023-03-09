@@ -130,5 +130,30 @@ aws budgets create-budget \
 ```
 Budget created on the console
 ![Budget created on AWS console]()
+
 Budget created using AWS CLI
 ![budgetoncli]()
+
+## Creating a Billing Alarm via CLI
+First, I had to enable billing alerts in the root account, in order to receive alerts
+- I created a SNS (Simple Notification Service) topic.-The SNS topic delivers an alert when you are overbilled.
+- To create an SNS topic,run the following command
+```
+aws sns create-topic --name billing-alarm
+```
+which returns the TopicARN
+- I then ran the following command in terminal to create a subscription
+```
+aws sns subscribe \
+    --topic-arn "arn:aws:sns:us-east-1:619023xxxxxx:billing-alarm" \
+    --protocol email \
+    --notification-endpoint rxxxxxxxxx@gmail.com
+```
+![arnsubscriptionpending]()
+
+![subscription confirmed]()
+
+- To create a metric alarm, I added configurations to a file named ``` alarm_config.json ``` . In the alarm actions field, I used the previously generated SNS Topic
+- In the terminal, run the command 
+``` aws cloudwatch put-metric-alarm --cli-input-json file://aws/json/alarm_config.json ``` 
+![alarm]()
