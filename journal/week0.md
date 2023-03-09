@@ -14,7 +14,11 @@ This documentation is a recap of the activities done and concepts learnt during 
 - Created a Billing Alarm
 - Created a Budget
 # Recreate conceptual diagram on napkin
+Here is a conceptual diagram made on a napkin
+![napkin design](assets/napkin.jpeg)
 # Recreated Logical Architectual Diagram in Lucid Charts
+I created the logical diagram of the application [here](https://lucid.app/lucidchart/b83c04cb-715a-4af9-a77a-57eb2341d3f5/edit?invitationId=inv_27d6e2ec-1a71-4abe-9fda-ec7d15e6b557&page=0_0#)
+![logical diagram](assets/lucidchart.png)
 
 # Creating a User
 To create a User I followed the following steps as outlined in [this](https://www.iguazio.com/docs/latest-release/cluster-mgmt/deployment/cloud/aws/howto/iam-user-create/) tutorial.
@@ -24,6 +28,8 @@ To create a User I followed the following steps as outlined in [this](https://ww
 - **Set permissions** by adding using to either an existing group, or by creating a new group(This is an important step for security reasons as someone is able to set the user's priviledges) 
 - Create the user
 - Save the User's credentials (**Access key ID** and **Secret Access Key**)
+
+![iam dashboard](assets/iamdashboard.png)
 
 # Install AWS CLI
 - To install AWS CLI, you first launch the GitPod environment
@@ -63,7 +69,7 @@ To check that the AWS CLI is working and the expected user is correct, I ran the
 ```
 aws sts get-caller-identity
 ```
-![getcalleridentity](image)
+![getcalleridentity](assets/getcalleridentity.png)
 
 ## Budget Via CLI
 I had earlier created a zero-spend budget on the AWS Console, however, with the allowance to create one more budget, I decided to try out using the AWS CLI to create one.
