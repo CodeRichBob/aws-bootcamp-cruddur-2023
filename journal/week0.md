@@ -62,3 +62,73 @@ To check that the AWS CLI is working and the expected user is correct, I ran the
 aws sts get-caller-identity
 ```
 ![getcalleridentity](image)
+
+## Budget Via CLI
+I had earlier created a zero-spend budget on the AWS Console, however, with the allowance to create one more budget, I decided to try out using the AWS CLI to create one.
+- In the project folder I created a new folder called **AWS** and in the folder added another folder called **json**.
+- In the json folder, I added two files, **budget.json** and **notifications-with-subscribers.json**
+- I Updated the ``` budgets.json ``` file with the following content
+```
+{
+    "BudgetLimit": {
+        "Amount": "1",
+        "Unit": "USD"
+    },
+    "BudgetName": "Budget on CLI",
+    "BudgetType": "COST",
+    "CostFilters": {
+        "TagKeyValue": [
+            "user:Key$value1",
+            "user:Key$value2"
+        ]
+    },
+    "CostTypes": {
+        "IncludeCredit": true,
+        "IncludeDiscount": true,
+        "IncludeOtherSubscription": true,
+        "IncludeRecurring": true,
+        "IncludeRefund": true,
+        "IncludeSubscription": true,
+        "IncludeSupport": true,
+        "IncludeTax": true,
+        "IncludeUpfront": true,
+        "UseBlended": false
+    },
+    "TimePeriod": {
+        "Start": 1477958399,
+        "End": 3706473600
+    },
+    "TimeUnit": "MONTHLY"
+}
+```
+- I also updated the ``` notifications-with-subscribers.json ``` file with the following content
+```
+[
+    {
+        "Notification": {
+            "ComparisonOperator": "GREATER_THAN",
+            "NotificationType": "ACTUAL",
+            "Threshold": 70,
+            "ThresholdType": "PERCENTAGE"
+        },
+        "Subscribers": [
+            {
+                "Address": "rgxxxxxxx@gmail.com",
+                "SubscriptionType": "EMAIL"
+            }
+        ]
+    }
+]
+```
+- In terminal, run the following commands
+```
+aws budgets create-budget \
+    	--account-id 619023720086 \
+    	--budget file://aws/json/budgets.json \
+    	--notifications-with-subscribers file://aws/json/notifications-with-subscribers.json
+      
+```
+Budget created on the console
+![Budget created on AWS console]()
+Budget created using AWS CLI
+![budgetoncli]()
